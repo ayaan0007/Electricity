@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Bill</title>
+    <style>
+        body{
+            background-size: 100%;
+            background-image:url(istockphoto-1096542444-612x612.jpg);
+            text-align: center;
+            padding:10px;
+            background-repeat: no-repeat;
+        }
+        h1{
+            text-decoration: underline;
+            color:aqua;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 700;
+            font-size: 40px;
+        }
+        .all{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: medium;
+            border:none;
+            margin: auto;
+        }
+        #department,#consumer,#units{
+            font-size: 20px;
+            color:rgb(77, 158, 212);
+            width:240px;
+            border-radius: 5px;
+            border:3px solid black;
+            background-color:rgb(228, 9, 9);
+        }
+        #calculate{
+            border-radius: 10px;
+            padding: 5px 0px 5px;
+            color:rgb(183, 0, 255);
+            background-color: white;
+            font-size: 20px;
+            width:150px;
+            height: 50px;
+            border:3px solid black;
+        }
+        #bill{
+            font-size: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+            font-weight: 700;
+            color:yellowgreen;
+            text-shadow: black;
+        }
+        #department:hover,#consumer:hover,#units:hover{
+            background-color: cyan;
+            width: 260px;
+            color:darkred;
+        }
+        #calculate:hover{
+            background-color: darkgray;
+            color:yellow;
+            width: 160px;
+            border:4px solid black;
+        }
+        #time{
+            width:400px;
+            border-radius: 7px;
+            float:right;
+            background-color: whitesmoke;
+            color: black;
+            border:3px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Electricity Bill Genenartor</h1>
+    <br>
+    <br>
+    <br>
+    <div class="all">
+    <select id="department" required >
+        <option value="Selection">----Select a category----</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Commercial">Commercial</option>
+        <option value="Residential">Residential</option>
+    </select>
+    <br><br>
+    <input type="text" id="consumer" name="consumer" required placeholder="Last 4 digits Consumer ID">
+    <br><br>
+    <input type="number" id="units" name="units" required placeholder="Enter units consumed">
+    <br><br>
+    <button id="calculate" onclick="calculate()">Calculate</button>
+    <br><br>
+    </div>
+    <div><span id="bill"></span></div>
+    <br><br>
+    <span id="time">The Curent time is:</span>
+    
+    <script type="text/javascript">
+
+        setInterval(updateTime,1000);
+        function updateTime(){
+            time.innerHTML=new Date();
+        }
+
+        function calculate()
+        {
+            setInterval(update,1000)
+            function update(){
+            time.innerHTML=new Date();
+            }
+
+            let amt=0.0;
+            let department=document.getElementById("department").value;
+            let consumer=document.getElementById("consumer").value;
+            let units=document.getElementById("units").value;
+            if(department=="Agriculture")
+            {
+                if(units>=1 && units<=1000)
+                    amt=units*5;
+                else
+                    amt=5000+(units-1000)*6;
+            }
+            else if(department=="Commercial")
+            {
+                if(units>=1 && units<=100)
+                    amt=units*5;
+                else if(units>=101 && units<=200)
+                    amt=500+(units-100)*5.5;
+                else if(units>=201 && units<=300)
+                    amt=500+550+(units-200)*6;
+                else if(units>=301 && units<=400)
+                    amt=1050+600+(units-300)*6.5;
+                else
+                    amt=1650+(units-400)*7+650;
+            }
+            else if(department=="Residential")
+            {
+                if(units>=1 && units<=100)
+                    amt=units*8;
+                else
+                    amt=800+(units-100)*9;
+            }
+            else
+            {
+                alert("Please select a department");
+            }
+            document.getElementById("bill").innerHTML="Your Billing amount is Rs"+amt+"/-";
+        }
+    </script>
+</body>
+
+</html>
